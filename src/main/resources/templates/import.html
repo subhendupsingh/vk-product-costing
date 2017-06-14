@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+
+</head>
+<body>
+	<div class="container" layout:fragment="content"
+		style="margin-top: 40px;">
+		<input type="hidden" th:value="${status}" id="status">
+		<input type="hidden" th:value="${message}" id="message">
+		<h3>Import Item Master</h3>
+				<div class="container p-3">
+					<form method="post" enctype="multipart/form-data" id="importFrm"
+						class="col-md-12 col-lg-12 col-xs-12" th:action="@{/upload}">
+						<input type="hidden" id="importType" value="itemmaster" name="importType"/>
+						<input type="hidden" id="po" th:value="${po}" name="po">
+						<div class="form-group">
+							<input type="file" name="file" />
+						</div>
+						<button type="submit" class="btn btn-primary">Import</button>
+					</form>
+					<div class="card m-3">
+						<div class="card-block">
+							<p class="text-justify">
+								<a
+									href="https://www.vendorcentral.in/st/vendor/members/po-mgmt/home?ref_=vc_ven-po-mgmt-items_subNav"
+									target="_blank">Click here</a> to download the purchase order
+								file.
+							</p>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+</body>
+</html>

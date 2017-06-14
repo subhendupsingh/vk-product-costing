@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+
+</head>
+<body>
+	<div class="container" layout:fragment="content"
+		style="margin-top: 30px;">
+		<input type="hidden" th:value="${status}" id="status"> <input
+			type="hidden" th:value="${message}" id="message"> <input
+			type="hidden" th:value="${po}" id="po"> <input type="hidden"
+			th:value="${pk}" id="pk">
+		<div class="row">
+			<h3>Cartons</h3>
+			<div class="ml-auto">
+				<button type="button" class="btn btn-primary btn-sm" id="not-found" data-toggle="modal" data-target="#notFoundModal">Mark
+					Not Found</button>
+				<button type="button" class="btn btn-secondary btn-sm"
+					id="open-carton">Open Carton</button>
+			</div>
+		</div>
+		<hr>
+
+		<table class="table table-striped header-fixed">
+			<thead>
+				<th>Carton No</th>
+				<th>Picklist</th>
+				<th>Purchase Order</th>
+				<th>Created</th>
+				<th>Status</th>
+				<th>Actions</th>
+			</thead>
+			<tbody>
+				<tr th:each="carton, stat : ${cartonsList}">
+					<td><a
+						th:href="@{/cartons?po=}+${po}+'&pk='+${carton.getSerialNumber()}"
+						th:text="Carton+' '+${carton.getSerialNumber()}" class="text-info"></a></td>
+					<td th:text="${carton.getPicklist().getCode()}"></td>
+					<td th:text="${carton.getPo()}"></td>
+					<td th:text="${carton.getCreated()}"></td>
+					<td th:switch="${carton.getIsOpen()}"><span th:case="1">Open</span>
+						<span th:case="0">Closed</span></td>
+					<td><i title="Reopen Carton" class="material-icons"
+						id="delete" style="cursor: pointer;"
+						th:onclick="'javascript:reopenCarton(\'' + ${carton.getId()} + '\')'">autorenew</i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<button class="btn btn-danger btn-lg btn-block" id="closepicklist">Close
+			Picklist</button>
+
+		<div class="modal fade" id="cartonModal" tabindex="-1" role="dialog"
+			aria-labelledby="cartonModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="cartonModalLabel">New message</h5>
+					</div>
+					<div class="modal-body">
+						<ul class="nav nav-tabs" id="potabs" role="tablist">
+							<li class="nav-item"><a class="nav-link active"
+								data-toggle="tab" href="#scan" role="tab" aria-controls="scan">Scan</a>
+							</li>
+							<li class="nav-item"><a class="nav-link" data-toggle="tab"
+								href="#dimensions" role="tab" aria-controls="dimensions">Dimensions</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="scan" role="tabpanel">
+								<br>
+								<div class="row">
+									<div class="col-xs-12 col-md-6 col-sm-6 col-lg-6">
+										<div class="form-group">
+											<label for="asintext" class="form-control-label">Scan
+												Here</label> <input type="text" class="form-control" id="asintext">
+										</div>
+									</div>
+									<div class="col-xs-12 col-md-6 col-sm-6 col-lg-6"
+										style="height: 100%">
+										<h6>Scanned Items</h6>
+										<div class="well" style="height: 150px; overflow: auto;">
+											<ul class="list-group" id="messages">
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane" id="dimensions" role="tabpanel">
+								<br>
+								<h5>Enter Carton Dimensions</h5>
+								<div class="form-group">
+									<label for="length" class="form-control-label">Length
+										(cm)</label> <input type="number" class="form-control" id="length">
+								</div>
+								<div class="form-group">
+									<label for="width" class="form-control-label">Width
+										(cm)</label> <input type="number" class="form-control" id="width">
+								</div>
+								<div class="form-group">
+									<label for="height" class="form-control-label">Height
+										(cm)</label> <input type="number" class="form-control" id="height">
+								</div>
+								<div class="form-group">
+									<label for="weight" class="form-control-label">Weight
+										(Kg)</label> <input type="number" class="form-control" id="weight">
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal" id="savecarton">Save</button>
+						<button type="button" class="btn btn-primary"
+							id="saveandclosecarton">Save & Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+			aria-labelledby="errorModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="errorModalLabel">Problems</h5>
+					</div>
+					<div class="modal-body">
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal" id="savecarton">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="notFoundModal" tabindex="-1" role="dialog"
+			aria-labelledby="notFoundModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="notFoundModalLabel">Mark Not
+							Found</h5>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="notfoundsku" class="form-control-label">SKU</label>
+							<input type="text" class="form-control" id="notfoundsku">
+						</div>
+						<div class="form-group">
+							<label for="notfoundskuqty" class="form-control-label">QUANTITY</label>
+							<input type="number" class="form-control" id="notfoundskuqty">
+						</div>
+						<p id="notfoundstatusmessage"></p>
+						<button type="button" class="btn btn-danger btn-small" id="markNotFound">Go!</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<th:block layout:fragment="footer-script">
+		<script src="/js/cartons.js"></script>
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+
+</head>
+<body>
+	<div class="container" layout:fragment="content"
+		style="margin-top: 40px;">
+		<input type="hidden" th:value="${status}" id="status">
+		<input type="hidden" th:value="${message}" id="message">
+		<ul class="nav nav-tabs" id="potabs" role="tablist">
+			<li class="nav-item"><a class="nav-link active"
+				data-toggle="tab" href="#open" role="tab" aria-controls="open">Open</a>
+			</li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab"
+				href="#closed" role="tab" aria-controls="close">Closed</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab"
+				href="#import" role="tab" aria-controls="import">Import</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="open" role="tabpanel">
+				<div class="container">
+					<table class="table table-striped">
+						<thead>
+							<th>Picklist</th>
+							<th>Purchase Order</th>
+							<th>Created</th>
+						</thead>
+						<tbody>
+							<tr th:each="pickList, stat : ${pickListList}">
+								<td>
+									<a th:href="@{/cartons?po=}+${po}+'&pk='+${pickList.getCode()}" th:text="${pickList.getCode()}" class="text-info"></a>
+								</td>
+								<td th:text="${pickList.getPurchaseOrder().getCode()}"></td>
+								<td th:text="${pickList.getCreated()}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane" id="closed" role="tabpanel">
+				<div class="container">
+					<table class="table table-striped">
+						<thead>
+							<th>Picklist</th>
+							<th>Purchase Order</th>
+							<th>Created</th>
+						</thead>
+						<tbody>
+							<tr th:each="pickList, stat : ${pickListListClosed}">
+								<td th:text="${pickList.getCode()}"></td>
+								<td th:text="${pickList.getPurchaseOrder().getCode()}"></td>
+								<td th:text="${pickList.getCreated()}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane" id="import" role="tabpanel">
+				<div class="container p-3">
+					<form method="post" enctype="multipart/form-data" id="importFrm"
+						class="col-md-12 col-lg-12 col-xs-12" th:action="@{/upload}">
+						<input type="hidden" id="importType" value="picklist" name="importType"/>
+						<input type="hidden" id="po" th:value="${po}" name="po">
+						<div class="form-group">
+							<input type="file" name="file" />
+						</div>
+						<button type="submit" class="btn btn-primary">Import</button>
+					</form>
+					<div class="card m-3">
+						<div class="card-block">
+							<p class="text-justify">
+								<a
+									href="https://www.vendorcentral.in/st/vendor/members/po-mgmt/home?ref_=vc_ven-po-mgmt-items_subNav"
+									target="_blank">Click here</a> to download the purchase order
+								file.
+							</p>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

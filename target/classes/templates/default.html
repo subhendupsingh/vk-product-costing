@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="layout::site-head">
+
+</head>
+<body>
+	<nav th:replace="layout::site-header"></nav>
+	<div th:replace="${view} :: content" id="content">
+    	Content
+	</div>
+	<div layout:replace="layout::footer-script"></div>
+</body>
+</html>
