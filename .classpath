@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" output="target/classes" path="src/main/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry excluding="**/*.java|**/application*.yml|**/application*.properties" including="**/*.java" kind="src" path="src/main/resources"/>
+	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
+	<classpathentry excluding="**/*.java|**/application*.yml|**/application*.properties" kind="src" path="src/main/resources"/>
 	<classpathentry kind="var" path="M2_REPO/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter-data-jpa/1.4.2.RELEASE/spring-boot-starter-data-jpa-1.4.2.RELEASE.jar"/>
@@ -76,6 +66,9 @@
 	<classpathentry kind="var" path="M2_REPO/org/unbescape/unbescape/1.1.0.RELEASE/unbescape-1.1.0.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/nz/net/ultraq/thymeleaf/thymeleaf-layout-dialect/1.4.0/thymeleaf-layout-dialect-1.4.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/codehaus/groovy/groovy/2.4.7/groovy-2.4.7.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter-websocket/1.5.3.RELEASE/spring-boot-starter-websocket-1.5.3.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-messaging/4.3.8.RELEASE/spring-messaging-4.3.8.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-websocket/4.3.4.RELEASE/spring-websocket-4.3.4.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter-test/1.4.2.RELEASE/spring-boot-starter-test-1.4.2.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-test/1.4.2.RELEASE/spring-boot-test-1.4.2.RELEASE.jar"/>
@@ -95,14 +88,30 @@
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/4.3.4.RELEASE/spring-test-4.3.4.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.21/nekohtml-1.9.21.jar"/>
 	<classpathentry kind="var" path="M2_REPO/xerces/xercesImpl/2.10.0/xercesImpl-2.10.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+	<classpathentry kind="var" path="M2_REPO/net/sf/supercsv/super-csv/2.4.0/super-csv-2.4.0.jar" sourcepath="M2_REPO/net/sf/supercsv/super-csv/2.4.0/super-csv-2.4.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/itextpdf/itextpdf/5.0.6/itextpdf-5.0.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/bouncycastle/bcmail-jdk14/1.38/bcmail-jdk14-1.38.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/bouncycastle/bcprov-jdk14/1.38/bcprov-jdk14-1.38.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/bouncycastle/bctsp-jdk14/1.38/bctsp-jdk14-1.38.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/poi/poi-ooxml/3.16/poi-ooxml-3.16.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/poi/poi/3.16/poi-3.16.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.10/commons-codec-1.10.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/poi/poi-ooxml-schemas/3.16/poi-ooxml-schemas-3.16.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/xmlbeans/xmlbeans/2.6.0/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/github/virtuald/curvesapi/1.04/curvesapi-1.04.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/com.google.cloud.tools.eclipse.appengine.standard.runtimeClasspathProvider/App Engine Standard Runtime">
 		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>

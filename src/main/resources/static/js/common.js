@@ -1,3 +1,4 @@
+var BASEURL;
 $(document).ready(function(){
 	if($('#message').val()){
 		var status=$('#status').val();
@@ -14,4 +15,6 @@ $(document).ready(function(){
 			   });
 		}
 	}
+	
+	BASEURL=$('#referer').val();
 });

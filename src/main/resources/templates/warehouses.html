@@ -15,10 +15,10 @@
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-info">Current Warehouses</li>
 				<li class="list-group-item list-group-item-action flex-column align-items-start" 
-				th:each="warehouse, stat : ${warehouseList}">
+				th:each="warehouse, stat : ${warehouseList}" th:onClick="'javascript:fillform(\''+${warehouse.getCity()}+'\',\''+${warehouse.getCode()}+'\',\''+${warehouse.getTin()}+'\',\''+${warehouse.getAddress()}+'\',\''+${warehouse.getDaysForDelivery()}+'\')'">
 				<div class="d-flex w-100 justify-content-between">
 					<span th:text="${warehouse.getCity()}"></span> 
-					<i class="material-icons" id="delete" style="cursor:pointer;" th:onclick="'javascript:deleteWarehouse(\'' + ${warehouse.getCode()} + '\')'">delete</i>
+					<!-- <i class="material-icons" id="delete" style="cursor:pointer;" th:onclick="'javascript:deleteWarehouse(\'' + ${warehouse.getCode()} + '\')'">delete</i> -->
 				</div>
 					<small><span th:text="${warehouse.getCode()}"></span></small>
 					
@@ -45,13 +45,18 @@
 					<label for="exampleTextarea">Address</label>
 					<textarea class="form-control" id="exampleTextarea" rows="3" th:field="*{address}" required></textarea>
 				</div>
+				<div class="form-group">
+					<label for="daysForDelivery">Days For Delivery</label>
+					<input type="number" class="form-control" id="daysForDelivery" th:field="*{daysForDelivery}" required>
+				</div>
 				<button type="submit" class="btn btn-primary">Add</button>
+				<button type="button" class="btn btn-danger" id="delete">Delete</button>
 			</form>
 		</div>
 	</div>
 	</div>
 	<th:block layout:fragment="footer-script">
-            <script src="/js/warehouses.js"></script>
+            <script th:src="@{/js/warehouses.js}"></script>
     </th:block>
 </body>
 </html>
